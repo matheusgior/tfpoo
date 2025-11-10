@@ -27,7 +27,7 @@ class JanelaChat extends JFrame {
         setLocationRelativeTo(null);
 
         // inicializa o Controlador
-        controlador = null; 
+        controlador = new ControladorChat(modeloConversas, modeloMensagens);
 
         // criação dos painéis
         JPanel painelEsquerdo = new JPanel();
