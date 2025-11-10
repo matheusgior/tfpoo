@@ -29,7 +29,9 @@ class JanelaChat extends JFrame {
         // inicializa o Controlador
         controlador = new ControladorChat(modeloConversas, modeloMensagens);
 
-        // criação dos painéis
+        controlador.setCallbackRepintarListaConversas(listaConversas::repaint);
+
+        // criação dos paineis
         JPanel painelEsquerdo = new JPanel();
         JPanel painelDireito = new JPanel();
 
@@ -37,5 +39,9 @@ class JanelaChat extends JFrame {
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painelEsquerdo, painelDireito);
         split.setDividerLocation(320);
         getContentPane().add(split);
+
+        // inicialização de dados e seleção
+        controlador.iniciarDados();
+        listaConversas.setSelectedIndex(0);
     }
 }
