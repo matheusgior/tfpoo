@@ -18,7 +18,7 @@ class JanelaChat extends JFrame {
     private final DefaultListModel<Mensagem> modeloMensagens = new DefaultListModel<>();
     private final JList<Mensagem> listaMensagens = new JList<>(modeloMensagens);
 
-    private ControladorChat controlador; // TODO
+    private ControladorChat controlador; //TODO
 
     JanelaChat() {
         super("Whatsapp-POO");
@@ -26,10 +26,10 @@ class JanelaChat extends JFrame {
         setSize(1400, 700);
         setLocationRelativeTo(null);
 
-        // Inicializa o Controlador
+        // inicializa o Controlador
         controlador = null; 
 
-        // Criação dos painéis
+        // criação dos painéis
         JPanel painelEsquerdo = new JPanel();
         JPanel painelDireito = new JPanel();
 
@@ -39,8 +39,3 @@ class JanelaChat extends JFrame {
         getContentPane().add(split);
     }
 }
-
-// Classes de modelo temporárias para compilação
-class Conversa {}
-class Mensagem {}
-interface PluginChat {}
