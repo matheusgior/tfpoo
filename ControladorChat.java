@@ -80,5 +80,69 @@ public class ControladorChat {
             callbackRepintarListaConversas.run();
         }
     }
-    
+    public void iniciarDados() {
+    // resposta automática
+    this.plugin = (conv, msg) -> {
+        Timer t = new Timer(600, e -> {
+            Mensagem r = new Mensagem("Fala Gabriel, recebido!", Mensagem.Lado.OUTRO);
+
+            // pra receber a resposta manter o chat aberto
+            if (conversaAtual == conv) {
+                modeloMensagens.addElement(r);
+            }
+
+            conv.mensagens.add(r);
+            conv.ultimaMensagem = r.texto;
+            conv.ultimoHorario = LocalDateTime.now();
+
+            if (callbackRepintarListaConversas != null) {
+                callbackRepintarListaConversas.run();
+            }
+        });
+        t.setRepeats(false);
+        t.start();
+    };
+
+    // conversas iniciais
+    Conversa prof = new Conversa("Professor Marco");
+    prof.mensagens.add(new Mensagem("Olá, Gabriel? Tudo bem com o trabalho final?", Mensagem.Lado.OUTRO));
+    prof.ultimaMensagem = "Olá, Gabriel? Tudo bem com o trabalho final?";
+    prof.ultimoHorario = LocalDateTime.now().minusMinutes(1);
+
+    Conversa gp = new Conversa("Guilherme Pretto");
+    gp.mensagens.add(new Mensagem("Oi Gabriel, já terminou meu layout de folha de advocacia? Abraços!", Mensagem.Lado.OUTRO));
+    gp.ultimaMensagem = "Oi Gabriel, já terminou meu layout de folha de advocacia? Abraços!";
+    gp.ultimoHorario = LocalDateTime.now().minusMinutes(3);
+
+    Conversa mg = new Conversa("Matheus Giordani");
+    mg.mensagens.add(new Mensagem("Fala Gabriel, vamos fazer o TF?", Mensagem.Lado.OUTRO));
+    mg.ultimaMensagem = "Fala Gabriel, vamos fazer o TF?";
+    mg.ultimoHorario = LocalDateTime.now().minusMinutes(5);
+
+    Conversa mae = new Conversa("Mãe");
+    mae.mensagens.add(new Mensagem("Filho, não esquece o casaco e boa aula!", Mensagem.Lado.OUTRO));
+    mae.mensagens.add(new Mensagem("Valeu mãe!", Mensagem.Lado.EU));
+    mae.ultimaMensagem = "Valeu mãe!";
+    mae.ultimoHorario = LocalDateTime.now().minusHours(2);
+
+    Conversa pai = new Conversa("Pai");
+    pai.mensagens.add(new Mensagem("Oi filho, recebeu o depósito?", Mensagem.Lado.OUTRO));
+    pai.mensagens.add(new Mensagem("Oi pai! Vou confirir assim que chegar em casa.", Mensagem.Lado.EU));
+    pai.ultimaMensagem = "Oi pai! Vou confirir assim que chegar em casa.";
+    pai.ultimoHorario = LocalDateTime.now().minusHours(4);
+
+    Conversa vo = new Conversa("Vó");
+    vo.mensagens.add(new Mensagem("Oi neto querido! Eu fiz um bolo, vem pegar um pedaço.", Mensagem.Lado.OUTRO));
+    vo.mensagens.add(new Mensagem("Oi vó! Já tô indo!", Mensagem.Lado.EU));
+    vo.ultimaMensagem = "Oi vó! Já tô indo!";
+    vo.ultimoHorario = LocalDateTime.now().minusHours(6);
+
+    modeloConversas.addElement(prof);
+    modeloConversas.addElement(gp);
+    modeloConversas.addElement(mg);
+    modeloConversas.addElement(mae);
+    modeloConversas.addElement(pai);
+    modeloConversas.addElement(vo);
+}
+
 }
