@@ -33,7 +33,7 @@ class JanelaChat extends JFrame {
 
         // criação dos paineis
         PainelConversas painelEsquerdo = new PainelConversas(listaConversas,controlador);
-        JPanel painelDireito = new JPanel();
+        PainelMensagens painelDireito = new PainelMensagens(listaMensagens, controlador);
 
         // divisor principal
         JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, painelEsquerdo, painelDireito);
