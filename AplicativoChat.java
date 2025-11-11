@@ -32,7 +32,7 @@ class JanelaChat extends JFrame {
         controlador.setCallbackRepintarListaConversas(listaConversas::repaint);
 
         // criação dos paineis
-        JPanel painelEsquerdo = new JPanel();
+        PainelConversas painelEsquerdo = new PainelConversas(listaConversas,controlador);
         JPanel painelDireito = new JPanel();
 
         // divisor principal
