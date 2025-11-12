@@ -18,7 +18,7 @@ class JanelaChat extends JFrame {
     private final DefaultListModel<Mensagem> modeloMensagens = new DefaultListModel<>();
     private final JList<Mensagem> listaMensagens = new JList<>(modeloMensagens);
 
-    private ControladorChat controlador; //TODO
+    private final ControladorChat controlador;
 
     JanelaChat() {
         super("Whatsapp-POO");
@@ -31,8 +31,12 @@ class JanelaChat extends JFrame {
 
         controlador.setCallbackRepintarListaConversas(listaConversas::repaint);
 
+        // menu do MenuApp
+        MenuApp menuApp = new MenuApp(this, () -> criarConversa(), () -> alternarSilencio());
+        setJMenuBar(menuApp.criarMenu());
+
         // criação dos paineis
-        PainelConversas painelEsquerdo = new PainelConversas(listaConversas,controlador);
+        PainelConversas painelEsquerdo = new PainelConversas(listaConversas, controlador);
         PainelMensagens painelDireito = new PainelMensagens(listaMensagens, controlador);
 
         // divisor principal
@@ -43,5 +47,17 @@ class JanelaChat extends JFrame {
         // inicialização de dados e seleção
         controlador.iniciarDados();
         listaConversas.setSelectedIndex(0);
+    }
+
+    // metodos de UI
+    private void criarConversa() {
+        String nome = JOptionPane.showInputDialog(this, "Nome da conversa:");
+        if (nome == null || nome.isBlank()) return;
+        controlador.criarConversa(nome);
+        listaConversas.setSelectedIndex(0);
+    }
+
+    private void alternarSilencio() {
+        controlador.alternarSilencio();
     }
 }
