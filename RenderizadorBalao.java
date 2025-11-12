@@ -46,16 +46,17 @@ public class RenderizadorBalao extends JPanel implements ListCellRenderer<Mensag
 
         balao.setPreferredSize(new Dimension(areaMensagem.getPreferredSize().width + 16, areaMensagem.getPreferredSize().height + rotuloHorario.getPreferredSize().height + 10));
 
+        // Corrigido: limpar e adicionar novamente o balão na posição correta
+        removeAll();
+
         if (valor.lado == Mensagem.Lado.EU) {
             balao.setBackground(COR_EU);
             areaMensagem.setBackground(COR_EU);
             add(balao, BorderLayout.EAST);
-            remove(BorderLayout.WEST);
         } else {
             balao.setBackground(COR_OUTRO);
             areaMensagem.setBackground(COR_OUTRO);
             add(balao, BorderLayout.WEST);
-            remove(BorderLayout.EAST);
         }
 
         setBackground(COR_FUNDO);

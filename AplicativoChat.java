@@ -32,7 +32,11 @@ class JanelaChat extends JFrame {
         controlador.setCallbackRepintarListaConversas(listaConversas::repaint);
 
         // menu do MenuApp
-        MenuApp menuApp = new MenuApp(this, () -> criarConversa(), () -> alternarSilencio());
+        MenuApp menuApp = new MenuApp(
+                this,
+                e -> criarConversa(),
+                e -> alternarSilencio()
+        );
         setJMenuBar(menuApp.criarMenu());
 
         // criação dos paineis
