@@ -136,8 +136,8 @@ public class ControladorChat {
         prof.ultimoHorario = LocalDateTime.now().minusMinutes(1);
 
         Conversa gp = new Conversa("Guilherme Pretto");
-        gp.mensagens.add(new Mensagem("Oi Gabriel, já terminou meu layout de folha de advocacia? Abraços!", Mensagem.Lado.OUTRO));
-        gp.ultimaMensagem = "Oi Gabriel, já terminou meu layout de folha de advocacia? Abraços!";
+        gp.mensagens.add(new Mensagem("Oi Gabriel, precisamos conversar.", Mensagem.Lado.OUTRO));
+        gp.ultimaMensagem = "Oi Gabriel, precisamos conversar.";
         gp.ultimoHorario = LocalDateTime.now().minusMinutes(3);
 
         Conversa mg = new Conversa("Matheus Giordani");
@@ -158,12 +158,11 @@ public class ControladorChat {
         pai.ultimoHorario = LocalDateTime.now().minusHours(4);
 
         Conversa vo = new Conversa("Vó");
-        vo.mensagens.add(new Mensagem("Oi neto querido! Eu fiz um bolo, vem pegar um pedaço.", Mensagem.Lado.OUTRO));
+        vo.mensagens.add(new Mensagem("Oi neto querido! Preciso da sua ajuda.", Mensagem.Lado.OUTRO));
         vo.mensagens.add(new Mensagem("Oi vó! Já tô indo!", Mensagem.Lado.EU));
         vo.ultimaMensagem = "Oi vó! Já tô indo!";
         vo.ultimoHorario = LocalDateTime.now().minusHours(6);
 
-        // popula ambas listas
         adicionarSeed(prof);
         adicionarSeed(gp);
         adicionarSeed(mg);
@@ -172,7 +171,6 @@ public class ControladorChat {
         adicionarSeed(vo);
     }
 
-    // helper para popular as duas listas
     private void adicionarSeed(Conversa c) {
         todasConversas.add(c);
         modeloConversas.addElement(c);

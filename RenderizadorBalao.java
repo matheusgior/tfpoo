@@ -4,12 +4,15 @@ import java.awt.*;
 import java.time.format.DateTimeFormatter;
 
 public class RenderizadorBalao extends JPanel implements ListCellRenderer<Mensagem> {
+
     private final JTextArea areaMensagem = new JTextArea();
     private final JLabel rotuloHorario = new JLabel();
     private final JPanel balao = new JPanel(new BorderLayout());
 
-    private static final DateTimeFormatter FORMATADOR_HORARIO = DateTimeFormatter.ofPattern("HH:mm");
-    private static final Color COR_EU = new Color(0xDCF8C6);
+    private static final DateTimeFormatter FORMATADOR_HORARIO =
+            DateTimeFormatter.ofPattern("HH:mm");
+
+    private static final Color COR_EU    = new Color(0xDCF8C6);
     private static final Color COR_OUTRO = Color.WHITE;
     private static final Color COR_FUNDO = new Color(0xECE5DD);
 
@@ -19,34 +22,51 @@ public class RenderizadorBalao extends JPanel implements ListCellRenderer<Mensag
         setBackground(COR_FUNDO);
         setBorder(new EmptyBorder(4, 8, 4, 8));
 
+        //area de texto
         areaMensagem.setLineWrap(true);
         areaMensagem.setWrapStyleWord(true);
         areaMensagem.setEditable(false);
         areaMensagem.setMargin(new Insets(6, 8, 6, 8));
         areaMensagem.setFont(areaMensagem.getFont().deriveFont(14f));
+        areaMensagem.setOpaque(true);
 
+        //horário
         rotuloHorario.setFont(rotuloHorario.getFont().deriveFont(10f));
         rotuloHorario.setForeground(Color.GRAY);
         rotuloHorario.setBorder(new EmptyBorder(0, 8, 4, 8));
 
+        //painel do balão
         balao.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
         balao.add(areaMensagem, BorderLayout.CENTER);
         balao.add(rotuloHorario, BorderLayout.SOUTH);
+
         add(balao, BorderLayout.CENTER);
     }
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends Mensagem> list, Mensagem valor, int indice, boolean isSelecionado, boolean temFoco) {
+    public Component getListCellRendererComponent(
+            JList<? extends Mensagem> list,
+            Mensagem valor,
+            int indice,
+            boolean isSelecionado,
+            boolean temFoco) {
+
         areaMensagem.setText(valor.texto);
         rotuloHorario.setText(valor.horario.format(FORMATADOR_HORARIO));
 
-        int larguraMaximaBalao = (int) (list.getWidth() * 0.6);
-        areaMensagem.setSize(larguraMaximaBalao, areaMensagem.getPreferredSize().height);
-        areaMensagem.setPreferredSize(new Dimension(areaMensagem.getPreferredSize().width, areaMensagem.getPreferredSize().height));
+        //largura correta
+        int larguraLista = list.getWidth();
+        if (larguraLista <= 0) {
+            
+            larguraLista = 400;
+        }
+        int larguraMaximaBalao = (int) (larguraLista * 0.6);
 
-        balao.setPreferredSize(new Dimension(areaMensagem.getPreferredSize().width + 16, areaMensagem.getPreferredSize().height + rotuloHorario.getPreferredSize().height + 10));
+        areaMensagem.setSize(larguraMaximaBalao, Short.MAX_VALUE);
+        Dimension pref = areaMensagem.getPreferredSize();
+        areaMensagem.setPreferredSize(pref);
 
-        // Corrigido: limpar e adicionar novamente o balão na posição correta
+        // reposiciona de acordo com o lado
         removeAll();
 
         if (valor.lado == Mensagem.Lado.EU) {
