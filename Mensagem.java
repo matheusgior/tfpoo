@@ -1,4 +1,3 @@
-// Mensagem.java
 import java.time.LocalDateTime;
 
 public class Mensagem {
